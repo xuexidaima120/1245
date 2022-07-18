@@ -1,0 +1,30 @@
+import qrcode
+import tkinter
+filename ='二维码.png'
+
+def mk_qrcode(content):
+    q = qrcode.QRCode()
+    q.add_data(content)
+    q.make()
+    #生成图片
+    img = q.make_image()
+    #保存图片
+    img.save(filename)
+
+def show():  #展现在图形界面中
+    root = tkinter.Tk()
+    canvas = tkinter.Canvas(root, width=400, height=400, bg='white')
+    img = tkinter.PhotoImage(file=filename)
+    canvas.create_image(200, 200, image=img)
+    canvas.pack()
+    root.mainloop()
+
+if __name__=='__main__':
+    while 1:
+        result = input('请输入表白内容:').strip()
+        if result =='end':
+            print('程序退出')
+            break
+        else:
+            mk_qrcode(result)
+            show()
